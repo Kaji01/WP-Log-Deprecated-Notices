@@ -6,8 +6,9 @@
  * Plugin Name: Log Deprecated Notices
  * Plugin URI: http://wordpress.org/extend/plugins/log-deprecated-notices/
  * Description: Logs the usage of deprecated files, functions, hooks, and function arguments, offers the alternative if available, and identifies where the deprecated functionality is being used. WP_DEBUG not required (but its general use is strongly recommended).
- * Version: 0.4.1
+ * Version: 0.4.1a
  * Author: Andrew Nacin
+ * Updated By: Big Cloud Media
  * Author URI: http://nacin.com/
  * License: GPLv2 or later
  */
@@ -510,7 +511,10 @@ class Deprecated_Log {
 	 * Hides Add New button, sets some column widths.
 	 */
 	function action_admin_print_styles() {
-		global $current_screen;
+		$current_screen = get_current_screen();
+		if ( $current_screen == NULL )
+			return;
+		
 		if ( 'edit-' . self::pt != $current_screen->id )
 			return;
 	?>
